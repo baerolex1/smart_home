@@ -1,0 +1,18 @@
+{
+  "devices": {
+    "device1": {
+      "configuration": {
+        "on": false
+      },
+      "measurements": [
+        {
+          "value": 17
+        },
+        {
+          "test": "hello"
+        }
+      ],
+      "id": "device1"
+    }
+  }
+}
