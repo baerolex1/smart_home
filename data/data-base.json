@@ -11,8 +11,20 @@
         {
           "test": "hello"
         }
-      ],
-      "id": "device1"
+      ]
+    },
+    "alex": {
+      "configuration": {
+        "on": false
+      },
+      "measurements": [
+        {
+          "value": 17
+        },
+        {
+          "test": "hello"
+        }
+      ]
     }
   }
 }
