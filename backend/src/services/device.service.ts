@@ -1,34 +1,33 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DataBaseService } from './data-base.service';
-import { Device } from '../models/device.model';
-import { Configuration } from '../models/configuration.model';
+import { Device } from '@prisma/client';
+import { PrismaService } from './prisma.service';
 
 Injectable()
 export class DeviceService {
 
-  constructor(@Inject(DataBaseService) private dataBaseService: DataBaseService) {}
+  constructor(@Inject(PrismaService) private prismaService: PrismaService) {}
 
-  getAll(): {[deviceId: string]: Device} {
-    return this.dataBaseService.get().devices;
+  async getAll(): Promise<Device[]> {
+    return await this.prismaService.device.findMany();
   }
 
-  get(deviceId: string): Device {
-    const device = this.dataBaseService.get().devices[deviceId];
+  async get(id: string): Promise<Device> {
+    const device = await this.prismaService.device.findUnique({ where: {id}});
     if (!device) {
-      throw new NotFoundException(`Device ${deviceId} was not found!`)
+      throw new NotFoundException(`Device with id ${id} was not found!`)
     }
     return device;
   }
 
-  updateConfig(deviceId: string, newConfig: Configuration): Device {
-    this.get(deviceId); // make sure device is existing
-    this.dataBaseService.get().devices[deviceId].configuration = newConfig;
-    return this.get(deviceId);
-  }
-
-  addMeasure(deviceId: string, measure: any): Device {
-    this.get(deviceId); // make sure device is existing
-    this.dataBaseService.get().devices[deviceId].measurements.push(measure);
-    return this.get(deviceId);
-  }
+  // updateConfig(deviceId: string, config: { enabled: boolean }): Prisma.Device {
+  //   this.get(deviceId); // make sure device is existing
+  //   this.dataBaseService.get().devices[deviceId].configuration = newConfig;
+  //   return this.get(deviceId);
+  // }
+  //
+  // addMeasure(deviceId: string, measure: any): Device {
+  //   this.get(deviceId); // make sure device is existing
+  //   this.dataBaseService.get().devices[deviceId].measurements.push(measure);
+  //   return this.get(deviceId);
+  // }
 }
