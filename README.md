@@ -44,6 +44,13 @@ POST http://localhost:3000/api/measurements/{deviceName}
 "frequencyInHertz": 43
 }
 
+**Add new device**:
+POST http://localhost:3000/api/devices
+{
+"name": "device2",
+"enabled": false
+}
+
 ## Frontend
 
 ``npm i``

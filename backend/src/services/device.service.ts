@@ -27,4 +27,10 @@ export class DeviceService {
       data: { enabled: device.enabled}
     });
   }
+
+  async create(device: DeviceDto): Promise<Device> {
+    return await this.prismaService.device.create({
+      data: device
+    });
+  }
 }

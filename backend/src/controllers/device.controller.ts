@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { Device } from '@prisma/client';
 import { DeviceService } from '../services/device.service';
 import { DeviceDto } from '../models/device.dto';
@@ -20,5 +20,10 @@ export class DeviceController {
   @Put(':deviceName')
   async update(@Param('deviceName') deviceName: string, @Body() device: DeviceDto): Promise<Device> {
     return await this.deviceService.update(deviceName, device);
+  }
+
+  @Post()
+  async create(@Body() device: DeviceDto): Promise<Device> {
+    return await this.deviceService.create(device);
   }
 }
