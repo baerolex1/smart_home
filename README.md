@@ -53,6 +53,8 @@ POST http://localhost:3000/api/devices
 
 ## Frontend
 
-``npm i``
+1) ``npm i``
 
-``npm run start``
+2) ``npm run start``
+
+3) Open http://localhost:4200/ in the browser
