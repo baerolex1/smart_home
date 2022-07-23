@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Device } from '@prisma/client';
 import { PrismaService } from './prisma.service';
+import { DeviceDto } from '../models/device.dto';
 
 Injectable()
 export class DeviceService {
@@ -11,23 +12,19 @@ export class DeviceService {
     return await this.prismaService.device.findMany();
   }
 
-  async get(id: string): Promise<Device> {
-    const device = await this.prismaService.device.findUnique({ where: {id}});
+  async get(deviceName: string): Promise<Device> {
+    const device = await this.prismaService.device.findUnique({ where: {name: deviceName}});
     if (!device) {
-      throw new NotFoundException(`Device with id ${id} was not found!`)
+      throw new NotFoundException(`Device with name ${deviceName} was not found!`)
     }
     return device;
   }
 
-  // updateConfig(deviceId: string, config: { enabled: boolean }): Prisma.Device {
-  //   this.get(deviceId); // make sure device is existing
-  //   this.dataBaseService.get().devices[deviceId].configuration = newConfig;
-  //   return this.get(deviceId);
-  // }
-  //
-  // addMeasure(deviceId: string, measure: any): Device {
-  //   this.get(deviceId); // make sure device is existing
-  //   this.dataBaseService.get().devices[deviceId].measurements.push(measure);
-  //   return this.get(deviceId);
-  // }
+  async update(deviceName: string, device: DeviceDto): Promise<Device> {
+    const deviceId = (await this.get(deviceName)).id;
+    return await this.prismaService.device.update({
+      where: {name: deviceName},
+      data: { enabled: device.enabled}
+    });
+  }
 }

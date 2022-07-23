@@ -14,33 +14,35 @@
 
 3) Run migrations ``npm run db:deploy`` (just initial)
 
-4) 
-
+4) Start backend ``npm run start:dev``
 
 ### API
 
-Get all configurations
+**Get all devices:**
+GET http://localhost:3000/api/devices
 
-GET http://localhost:3000/api/configurations
+**Get single device:**
+GET http://localhost:3000/api/devices/{deviceName}
 
-Get configuration for one device
+**Get measurements for device:**
+GET http://localhost:3000/api/measurements/{deviceName}
 
-GET http://localhost:3000/api/configurations/{deviceId}
-
-example: GET http://localhost:3000/api/configurations/device1
-
-Add new measure
-
-POST http://localhost:3000/api/measurements/{deviceId}
-
-any measurement as json format in the body like this:
+**Update device:**
+PUT http://localhost:3000/api/measurements/{deviceName} 
 {
-"value": 77,
-"anyOtherProperty": "test"
+    "enabled": true
 }
 
-
-http://localhost:5555/
+**Add measure:**
+POST http://localhost:3000/api/measurements/{deviceName}
+{
+"temperatureInDegree": 1,
+"currentInAmpere": 3.5,
+"voltageInVolt": 5,
+"powerInWatts": 3,
+"powerFactor": 5,
+"frequencyInHertz": 43
+}
 
 ## Frontend
 

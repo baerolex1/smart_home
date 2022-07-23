@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { Device } from '@prisma/client';
 import { DeviceService } from '../services/device.service';
+import { DeviceDto } from '../models/device.dto';
 
 @Controller("api/devices")
 export class DeviceController {
@@ -11,14 +12,13 @@ export class DeviceController {
     return await this.deviceService.getAll();
   }
 
-  @Get(':deviceId')
-  async get(@Param('deviceId') deviceId: string): Promise<Device> {
-    return await this.deviceService.get(deviceId);
+  @Get(':deviceName')
+  async get(@Param('deviceName') deviceName: string): Promise<Device> {
+    return await this.deviceService.get(deviceName);
   }
 
-  // TODO
-  // @Put(':deviceId')
-  // updateConfig(@Param('deviceId') deviceId: string, @Body() newConfig: Configuration): Device {
-  //   return this.deviceService.updateConfig(deviceId, newConfig);
-  // }
+  @Put(':deviceName')
+  async update(@Param('deviceName') deviceName: string, @Body() device: DeviceDto): Promise<Device> {
+    return await this.deviceService.update(deviceName, device);
+  }
 }
