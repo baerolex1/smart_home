@@ -28,7 +28,7 @@ GET http://localhost:3000/api/devices/{deviceName}
 GET http://localhost:3000/api/measurements/{deviceName}
 
 **Update device:**
-PUT http://localhost:3000/api/measurements/{deviceName} 
+PUT http://localhost:3000/api/devices/{deviceName} 
 {
     "enabled": true
 }

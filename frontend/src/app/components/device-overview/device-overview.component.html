@@ -1,0 +1,6 @@
+<app-section-ct title="Devices">
+    <button mat-icon-button color="primary" class="add-device" matTooltip="Add a new device" (click)="addNew()">
+        <mat-icon>add_box</mat-icon>
+    </button>
+    <mat-slide-toggle *ngFor="let device of devices;" class="device-slider" (change)="updateDevice(device)" [checked]="device.enabled" [matTooltip]="getSliderTooltip(device)">{{device.name}}</mat-slide-toggle>
+</app-section-ct>
