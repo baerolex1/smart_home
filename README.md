@@ -53,6 +53,8 @@ POST http://localhost:3000/api/devices
 
 ## Frontend
 
+``cd frontend``
+
 1) ``npm i``
 
 2) ``npm run start``
