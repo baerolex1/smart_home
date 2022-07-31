@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../../services/device.service';
-import { Device } from '../../models/device.model';
+import { AddNewDeviceData, Device } from '../../models/device.model';
 import { MatDialog } from '@angular/material/dialog';
-import { AddNewDeviceComponent, AddNewDeviceData } from '../add-new-device/add-new-device.component';
+import { AddNewDeviceComponent } from '../add-new-device/add-new-device.component';
 
 @Component({
   selector: 'app-device-overview',
@@ -16,8 +16,11 @@ export class DeviceOverviewComponent implements OnInit {
   constructor(private deviceService: DeviceService, private dialog: MatDialog) { }
 
   async ngOnInit(): Promise<void> {
+    await this.loadDevices();
+  }
+
+  async loadDevices(): Promise<void> {
     this.devices = await this.deviceService.loadDevices().toPromise();
-    console.log(this.devices)
   }
 
   async updateDevice(device: Device): Promise<void> {
@@ -32,10 +35,9 @@ export class DeviceOverviewComponent implements OnInit {
   addNew(): void {
     this.dialog.open(AddNewDeviceComponent, {
       width: '250px',
-    }).afterClosed().subscribe((data: AddNewDeviceData) => {
-      console.log('The dialog was closed', data);
-     // TODO
-      // this.deviceService.add()
+    }).afterClosed().subscribe(async (data: AddNewDeviceData) => {
+       await this.deviceService.add(data).toPromise();
+       await this.loadDevices();
     });
   }
 

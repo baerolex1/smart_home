@@ -4,3 +4,8 @@ export type Device = {
   name: string
   enabled: boolean
 }
+
+export type AddNewDeviceData = {
+  name: string
+  enabled: boolean
+}

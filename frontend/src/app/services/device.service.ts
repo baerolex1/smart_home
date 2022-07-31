@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Device } from '../models/device.model';
+import { AddNewDeviceData, Device } from '../models/device.model';
 import { BACKEND_URL } from '../constants/url.constant';
 import { Observable } from 'rxjs';
 
@@ -14,5 +14,9 @@ export class DeviceService {
 
   updateDevice(device: Device): Observable<Device> {
     return this.http.put<Device>(`${BACKEND_URL.DEVICES}/${device.name}`, { name: device.name, enabled: device.enabled });
+  }
+
+  add(device: AddNewDeviceData): Observable<Device> {
+    return this.http.post<Device>(BACKEND_URL.DEVICES, device);
   }
 }
