@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Add new device</h1>
+<div mat-dialog-content>
+    <p>Name</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Name of your device</mat-label>
+        <input matInput [formControl]="name">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="getData()" cdkFocusInitial [disabled]="!name.valid">Ok</button>
+</div>
