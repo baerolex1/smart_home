@@ -8,5 +8,6 @@ export async function seedDb(prisma: PrismaClient, isDev: boolean): Promise<void
 }
 
 export async function clearDb(prisma: PrismaClient, isDev: boolean): Promise<void> {
-  // await prisma.user.deleteMany({});
+  await prisma.device.deleteMany({});
+  await prisma.measure.deleteMany({});
 }

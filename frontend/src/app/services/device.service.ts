@@ -9,10 +9,12 @@ export class DeviceService {
   constructor(private http: HttpClient) { }
 
   loadDevices(): Observable<Device[]> {
+    console.log("Test")
     return this.http.get<Device[]>(BACKEND_URL.DEVICES);
   }
 
   updateDevice(device: Device): Observable<Device> {
+    console.log(device)
     return this.http.put<Device>(`${BACKEND_URL.DEVICES}/${device.name}`, { name: device.name, enabled: device.enabled });
   }
 
