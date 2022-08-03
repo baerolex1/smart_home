@@ -14,6 +14,7 @@ export class MeasureController {
 
   @Post(':deviceName')
   async add(@Param('deviceName') deviceName: string, @Body() measure: MeasureDto): Promise<Measure> {
+    console.log(measure)
     return await this.measureService.add(deviceName, measure);
   }
 }

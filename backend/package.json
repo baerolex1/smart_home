@@ -14,7 +14,7 @@
     "start:prod": "node dist/main",
     "run:db": "docker-compose up",
     "dev:fresh": "npm run db:reset --force && npm run seed:db && npm run dev",
-    "seed:db": "yarn clear:db && ts-node prisma/seeds/scripts/seedDb",
+    "seed:db": "npm run clear:db && ts-node prisma/seeds/scripts/seedDb",
     "clear:db": "ts-node prisma/seeds/scripts/clearDb",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
